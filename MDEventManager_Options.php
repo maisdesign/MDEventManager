@@ -1,23 +1,22 @@
 <?php
-        /***************/
-        /* MaisDesign  */
-        /***************/
+/***************/
+/* MaisDesign  */
+/***************/
 
-        /***********************************/
-        /*                                 */
-        /* Written on: 27/08/13            */
-        /* @ 20.17                         */
-        /* For the project: MDEventManager */
-        /* By: marco@maisdesign.it         */
-        /*                                 */
-        /***********************************/
+/***********************************/
+/*                                 */
+/* Written on: 27/08/13            */
+/* @ 20.17                         */
+/* For the project: MDEventManager */
+/* By: marco@maisdesign.it         */
+/*                                 */
+/***********************************/
 
 if ( !defined( 'MDEventManager' ) ) { exit; } // Exit if accessed directly
 $pluralname = get_option('MDEventManager_cposts_name_plural');
 $pluralnameArr = explode('|',$pluralname);
 global $MDEventManager_options;
-$MDEventManager_options = array();
-$MDEventManager_options[] = array(
+$MDEventManager_options = array(
     //tab general
     'general' => array(
         'label' => __('General', 'yit'),
@@ -73,32 +72,23 @@ $MDEventManager_options[] = array(
 
 
 foreach( $pluralnameArr as $tabby){
-    $MDEventManager_options[] = array(
-        $tabby => array(
-            'label' => __($tabby, 'yit'),
-            'sections' => array(
-                $tabby => array(
-                    'title' =>  $tabby.__(' General Settings', 'yit'),
-                    'description' => '',
-                    'fields' => array(
-                        'MDEventManager_'.$tabby => array(
-                            'title' => __('Enable MDEvent Manager Custom Posts', 'yit'),
-                            'description' => __( 'Enables the custom posts. (Default: Off)', 'yit' ),
-                            'type' => 'checkbox',
-                            'std' => false
-                        ),
-                        'MDEventManager_'.$tabby.'_template' => array(
-                            'title' =>  __('Choose a template for this Custom post', 'yit'),
-                            'description' => __( 'You can select a template created by me or use your Template one or upload a file named <code>'.$tabby.'-single.php</code> and <code>'.$tabby.'-archive.php</code> into your template root folder.', 'yit' ),
-                            'type' => 'select',
-                            'std' => 'template-default',
-                            'options' => array(
-                                'repeat' => __( 'TimeLine Style', 'yit' ),
-                            )
-                        ),
-                    )//fields
-                ),//general
-            ) //sections
-        ),);
 
+    $tabby = array(
+        'label' => __($tabby, 'yit'),
+        'sections' => array(
+            $tabby => array(
+                'title' =>  $tabby.__(' General Settings', 'yit'),
+                'description' => '',
+                'fields' => array(
+                    'MDEventManager_'.$tabby => array(
+                        'title' => __('Enable MDEvent Manager Custom Posts', 'yit'),
+                        'description' => __( 'Enables the custom posts. (Default: Off)', 'yit' ),
+                        'type' => 'checkbox',
+                        'std' => false
+                    ),
+                )//fields
+            ),//general
+        ) //sections
+    );//Top General
+    array_push($MDEventManager_options, $tabby);
 }
